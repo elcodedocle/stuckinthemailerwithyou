@@ -1,0 +1,8 @@
+# basic rule, one source, one destination
+someaddress@mydomain.tld myaccount@myemailprovider
+
+# specific rule, forward one source to multiple destinations
+someaddress@mydomain.tld myaccount@myemailprovider myotheraccount@myotheremailprovider
+
+#generic rule, forwards all emails
+@mydomain.tld whereallemailsgo@myemailprovider

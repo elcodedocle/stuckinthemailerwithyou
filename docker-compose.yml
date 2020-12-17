@@ -1,0 +1,8 @@
+version: '2'
+services:
+    postfix:
+        image: stuckinthemailerwithyou:latest
+        ports:
+            - "25:25"
+        env_file:
+            - ./postfix.env
