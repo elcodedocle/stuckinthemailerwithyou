@@ -26,8 +26,28 @@ if [ -s /etc/postfix/virtual ]; then
     postmap /etc/postfix/virtual
 fi
 
+if [ ! -s /etc/mail/dkim-keys/${POSTFIX_DOMAIN} ]; then
+    mkdir -p /etc/mail/dkim-keys/${POSTFIX_DOMAIN}
+    cd /etc/mail/dkim-keys/${POSTFIX_DOMAIN}
+    opendkim-genkey -d ${POSTFIX_DOMAIN} --append-domain --subdomains
+fi
+echo "SET UP YOUR DKIM PUBLIC KEY ON default._domainkey.${POSTFIX_DOMAIN} IN TXT DNS RECORD:"
+cat /etc/mail/dkim-keys/$POSTFIX_DOMAIN/default.txt
+
+chown opendkim:opendkim /etc/mail/dkim-keys/${POSTFIX_DOMAIN}/default.private
+chmod 600 /etc/mail/dkim-keys/${POSTFIX_DOMAIN}/default.private
+chown opendkim:opendkim /etc/mail/dkim-keys/${POSTFIX_DOMAIN}/default.txt
+chmod 600 /etc/mail/dkim-keys/${POSTFIX_DOMAIN}/default.txt
+echo "KeyFile            /etc/mail/dkim-keys/${POSTFIX_DOMAIN}/default.private" >> /etc/opendkim.conf
+echo "Domain             ${POSTFIX_DOMAIN}" >> /etc/opendkim.conf
+
+echo "TrustedAuthservIDs smtp.${POSTFIX_DOMAIN}, mail.${POSTFIX_DOMAIN}, ${POSTFIX_DOMAIN}" >> /etc/opendmarc.conf
+
+
 # postfix start-fg can be used instead without rsyslog or any of the lines below, though it is not nearly as verbose
 service rsyslog start
+service opendkim start
+service opendmarc start
 service postfix start
 i=0
 while [ $i -lt 5 ]
@@ -42,7 +62,7 @@ do
 done
 tail -f /var/log/mail.log &
 # ensure container is terminated when postfix stops
-while service postfix status > dev/null
+while service postfix status > /dev/null
 do
  sleep 1
 done

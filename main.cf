@@ -31,3 +31,7 @@ inet_protocols = all
 
 policy-spf_time_limit = 3600s
 
+smtpd_milters = inet:localhost:8892, local:opendmarc/opendmarc.sock
+non_smtpd_milters = $smtpd_milters
+
+

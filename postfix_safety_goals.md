@@ -46,17 +46,19 @@ smtpd_recipient_restrictions =
 
  - Set postfix `smtpd_relay_restrictions` directive to `permit_mynetworks` `permit_sasl_authenticated` `defer_unauth_destination` to only allow authenticated & local connections.
 
+ - Set up OpenDKIM to sign outgoing emails
+
+ - Set up OpenDMARC to Reject Emails That Fail DMARC Check (The provided default configurartion sets a very basic file based solution without dbconf)
+
 ### DOMAIN DNS RELATED SETUP
 
  - Set PTR reverse DNS record.
 
  - Set SPF TXT DNS record.
 
- - Set up DKIM / DKIM TXT DNS record.
+ - Set up DKIM keys / DKIM TXT DNS record -> Use the generated `default.txt` echoed on deploy or override `/etc/mail/dkim-keys/${POSTFIX_DOMAIN}/default.private` and `/etc/mail/dkim-keys/${POSTFIX_DOMAIN}/default.txt` via docker volumes.
 
 ### OTHER SERVICES
-
- - Set up OpenDMARC to Reject Emails That Fail DMARC Check.
 
  - Set up fail2ban to stop SMTP AUTH flood attempts.
 
