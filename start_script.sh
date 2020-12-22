@@ -15,6 +15,14 @@ else
         echo "mydestination = \$myhostname, ${HOSTNAME}, localhost.localdomain, localhost" >> /etc/postfix/main.cf
     fi
 fi
+if [ [ ! -z "${POSTFIX_TLS_CERT_PATH}" ]; then
+    echo "smtpd_tls_cert_file=${POSTFIX_TLS_CERT_PATH}" >> /etc/postfix/main.cf
+    echo "smtpd_tls_key_file=${POSTFIX_TLS_KEY_PATH}" >> /etc/postfix/main.cf
+    chown postfix:postfix ${POSTFIX_TLS_CERT_PATH}
+    chown postfix:postfix ${POSTFIX_TLS_KEY_PATH}
+    chmod 644 ${POSTFIX_TLS_CERT_PATH}
+    chmod 600 ${POSTFIX_TLS_KEY_PATH}
+fi
 if [ "${POSTFIX_APPEND_VIRTUAL_ALIAS_CF}" == "yes" ] || [ "${POSTFIX_APPEND_VIRTUAL_ALIAS_CF}" == "true" ]; then
     echo "virtual_alias_domains = ${POSTFIX_DOMAIN}" >> /etc/postfix/main.cf
     echo "virtual_alias_maps = hash:/etc/postfix/virtual" >> /etc/postfix/main.cf

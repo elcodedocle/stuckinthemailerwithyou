@@ -6,6 +6,8 @@ ENV POSTFIX_DOMAIN=yourdomain.tld
 ENV POSTFIX_MAILNAME=yourreversednsmailhost
 ENV POSTFIX_APPEND_VIRTUAL_ALIAS_CF=yes
 ENV POSTFIX_APPEND_MYDESTINATION_CF=yes
+ENV POSTFIX_TLS_CERT_PATH=smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+ENV POSTFIX_TLS_KEY_PATH=smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
 
 ENV DEBIAN_FRONTEND=noninteractive
 
