@@ -49,6 +49,8 @@ smtpd_recipient_restrictions =
  - Set up OpenDKIM to sign outgoing emails
 
  - Set up OpenDMARC to Reject Emails That Fail DMARC Check (The provided default configurartion sets a very basic file based solution without dbconf)
+ 
+ - Enable TLS encryption in non-opportunistic mode via `smtp_tls_security_level = encrypt`
 
 ### DOMAIN DNS RELATED SETUP
 
@@ -57,8 +59,6 @@ smtpd_recipient_restrictions =
  - Set SPF TXT DNS record.
 
  - Set up DKIM keys / DKIM TXT DNS record -> Use the generated `default.txt` echoed on deploy or override `/etc/mail/dkim-keys/${POSTFIX_DOMAIN}/default.private` and `/etc/mail/dkim-keys/${POSTFIX_DOMAIN}/default.txt` via docker volumes.
- 
- - Enable TLS encryption in non-opportunistic mode via `smtp_tls_security_level = encrypt`
 
 ### OTHER SERVICES
 
