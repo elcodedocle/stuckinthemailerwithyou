@@ -57,6 +57,8 @@ smtpd_recipient_restrictions =
  - Set SPF TXT DNS record.
 
  - Set up DKIM keys / DKIM TXT DNS record -> Use the generated `default.txt` echoed on deploy or override `/etc/mail/dkim-keys/${POSTFIX_DOMAIN}/default.private` and `/etc/mail/dkim-keys/${POSTFIX_DOMAIN}/default.txt` via docker volumes.
+ 
+ - Enable TLS encryption in non-opportunistic mode via `smtp_tls_security_level = encrypt`
 
 ### OTHER SERVICES
 
@@ -66,6 +68,6 @@ smtpd_recipient_restrictions =
 
  - Integrate SpamAssassin to detect and filter out spam.
 
- - Use Pflogsumm cia crontab to produce and mail periodical reports to a supervisor email account, in order to detect any unusual activity.
+ - Use Pflogsumm via crontab to produce and mail periodical reports to a supervisor email account, in order to detect any unusual activity.
 
 Missing something? Say something! Open a ticket or send your PR.
