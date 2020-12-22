@@ -23,9 +23,9 @@ Please,
  - Read the license.
  - Use responsibly. 
  - Try to avoid turning your service into a spam beacon, even though that's nowhere near what this technology's foundation is about and we are all set up to fail miserably under layers and layers of misconfigured and complex rules interacting with each other while spammers throw at it truckloads of money to mess it all up even more. 
- - Check out [these tips](postfix_safety_goals.md)).
- - And [mail.cf](mail.cf baseline config) you may want to override via volume.
- - And [start_script.sh](instance-dependant config appends) you may want to disable via env vars if you override them via volume.
+ - Check out [these tips](postfix_safety_goals.md).
+ - And [mail.cf baseline config](mail.cf) you may want to override via volume.
+ - And [instance-dependant config appends](start_script.sh) you may want to disable via env vars if you override them via volume.
  - And [virtual.template](virtual.template) which provides examples to override `/etc/postfix/virtual` via volume if you want to set the configuration for more than one domain or accounts in the domain or relay destinations for an account or accounts, instead of relying to a single destination via `POSTFIX_RELAY_TO_ADDRESS` env var.
 
 Contributions: Submit your PR or ticket/comment with your grievance/request to https://github.com/elcodedocle/stuckinthemailerwithyou
