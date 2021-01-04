@@ -15,7 +15,7 @@ else
         echo "mydestination = \$myhostname, ${HOSTNAME}, localhost.localdomain, localhost" >> /etc/postfix/main.cf
     fi
 fi
-if [ [ ! -z "${POSTFIX_TLS_CERT_PATH}" ]; then
+if [ ! -z "${POSTFIX_TLS_CERT_PATH}" ]; then
     echo "smtpd_tls_cert_file=${POSTFIX_TLS_CERT_PATH}" >> /etc/postfix/main.cf
     echo "smtpd_tls_key_file=${POSTFIX_TLS_KEY_PATH}" >> /etc/postfix/main.cf
     chown postfix:postfix ${POSTFIX_TLS_CERT_PATH}
